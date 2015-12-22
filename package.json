@@ -1,0 +1,27 @@
+{
+  "name": "gulp-jspm-assets",
+  "version": "0.1.0",
+  "description": "Gulp plugin to easily consume assets from jspm packages",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --version && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickvdyck/gulp-jspm-assets.git"
+  },
+  "keywords": [
+    "Gulp"
+  ],
+  "author": "Nick Van Dyck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nickvdyck/gulp-jspm-assets/issues"
+  },
+  "homepage": "https://github.com/nickvdyck/gulp-jspm-assets#readme",
+  "devDependencies": {
+    "eslint": "^1.10.3",
+    "typescript": "^1.7.5"
+  }
+}
