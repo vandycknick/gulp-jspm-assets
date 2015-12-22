@@ -8,7 +8,7 @@ import { Readable } from 'stream';
 
 const fileExt: any = /file:\/\//i;
 
-class JspmAssetStream extends Readable {
+export class JspmAssetStream extends Readable {
 
     private package: string = '';
     private glob: string = '';

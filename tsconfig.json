@@ -3,6 +3,7 @@
         "charset": "utf8",
         "target": "es5",
         "module": "commonjs",
+        "declaration": true,
         "removeComments": true,
         "sourceMap": true,
         "rootDir": "src",
