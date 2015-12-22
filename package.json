@@ -1,12 +1,12 @@
 {
   "name": "gulp-jspm-assets",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Gulp plugin to easily consume assets from jspm packages",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf lib",
-    "prebuild": "npm run clean", 
+    "prebuild": "npm run clean",
     "build": "tsc --version && tsc",
     "prepublish": "npm run build"
   },
