@@ -5,7 +5,10 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --version && tsc"
+    "clean": "rimraf lib",
+    "prebuild": "npm run clean", 
+    "build": "tsc --version && tsc",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,7 +24,8 @@
   },
   "homepage": "https://github.com/nickvdyck/gulp-jspm-assets#readme",
   "devDependencies": {
-    "eslint": "^1.10.3",
-    "typescript": "^1.7.5"
+    "eslint": "1.10.3",
+    "rimraf": "2.4.4",
+    "typescript": "1.7.5"
   }
 }
