@@ -6,14 +6,13 @@
 /// <reference path="../node/node.d.ts" />
 
 declare module 'vinyl' {
-
-	import fs = require("fs");
+	import * as fs from 'fs';
 
 	/**
 	 * A virtual file format.
 	 */
-	class File {
-		constructor(options?: {
+	interface File {
+		new(options?: {
 			/**
 			* Default: process.cwd()
 			*/
@@ -44,20 +43,20 @@ declare module 'vinyl' {
 		/**
 		 * Default: process.cwd()
 		 */
-		public cwd: string;
+		cwd: string;
 		/**
 		 * Used for relative pathing. Typically where a glob starts.
 		 */
-		public base: string;
+		base: string;
 		/**
 		 * Full path to the file.
 		 */
-		public path: string;
-		public stat: fs.Stats;
+		path: string;
+		stat: fs.Stats;
 		/**
 		 * Type: Buffer|Stream|null (Default: null)
 		 */
-		public contents: Buffer | NodeJS.ReadableStream;
+		contents: Buffer | NodeJS.ReadableStream;
 		/**
 		 * Returns path.relative for the file base and file path.
 		 * Example:
@@ -68,27 +67,27 @@ declare module 'vinyl' {
 		 *  });
 		 *  console.log(file.relative); // file.js
 		 */
-		public relative: string;
+		relative: string;
 
-		public isBuffer(): boolean;
+		isBuffer(): boolean;
 
-		public isStream(): boolean;
+		isStream(): boolean;
 
-		public isNull(): boolean;
+		isNull(): boolean;
 
-		public isDirectory(): boolean;
+		isDirectory(): boolean;
 
 		/**
 		 * Returns a new File object with all attributes cloned. Custom attributes are deep-cloned.
 		 */
-		public clone(opts?: { contents?: boolean }): File;
+		clone(opts?: { contents?: boolean }): File;
 
 		/**
 		 * If file.contents is a Buffer, it will write it to the stream.
 		 * If file.contents is a Stream, it will pipe it to the stream.
 		 * If file.contents is null, it will do nothing.
 		 */
-		public pipe<T extends NodeJS.ReadWriteStream>(
+		pipe<T extends NodeJS.ReadWriteStream>(
 			stream: T,
 			opts?: {
 				/**
@@ -100,9 +99,11 @@ declare module 'vinyl' {
 		/**
 		 * Returns a pretty String interpretation of the File. Useful for console.log.
 		 */
-		public inspect(): string;
+		inspect(): string;
 	}
+    
+    var file: File;
 
-	export default File;
+    export = file;
 
 }

@@ -5,7 +5,7 @@ import * as jspm from 'jspm';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Readable } from 'stream';
-import File from 'vinyl';
+import * as File from 'vinyl';
 
 const fileExt: any = /file:\/\//i;
 
@@ -76,4 +76,3 @@ export function jspmAssets(packageName: string, glob: string): JspmAssetStream {
         package: packageName
     });
 }
-
