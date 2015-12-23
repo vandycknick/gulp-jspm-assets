@@ -6,5 +6,5 @@ declare module 'jspm' {
 
     let jspm: IPackageManager;
 
-    export default jspm;
+    export = jspm;
 }
