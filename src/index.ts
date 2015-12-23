@@ -1,6 +1,6 @@
 'use strict';
 
-import jspm from 'jspm';
+import * as jspm from 'jspm';
 
 import * as path from 'path';
 import * as fs from 'fs';
@@ -70,9 +70,10 @@ export class JspmAssetStream extends Readable {
 
 }
 
-export default function jspmAssets(packageName: string, glob: string): JspmAssetStream {
+export function jspmAssets(packageName: string, glob: string): JspmAssetStream {
     return new JspmAssetStream({
         glob : glob,
         package: packageName
     });
 }
+
