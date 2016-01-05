@@ -4,19 +4,19 @@
 
 Consume css, images, ... assets from jspm all via a nice stream
 
-#API
+##API
 
-##jspmAssets(packageName, glob)
+###jspmAssets(packageName, glob)
 Returns a new instance of JspmAssetStream
 
-##JspmAssetStream(options)
+###JspmAssetStream(options)
 Constructor creates a new file stream matching files in the requested jspm package
 
-##Options
+###Options
 - packageName: name of an installed jspm package
 - glob: glob required to match files in the jspm package folder
 
-#Usage
+##Usage
 ```js
 var gulp = require('gulp');
 var jspmAssets = require('gulp-jspm-assets');
