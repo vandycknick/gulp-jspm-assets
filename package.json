@@ -5,11 +5,12 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha src/**/*.spec.ts --require ts-node/register",
     "clean": "rimraf lib",
+    "clean-tests": "rimraf lib/**/*.spec.*",
     "prebuild": "npm run clean",
     "build": "tsc --version && tsc",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build && npm run clean-tests",
     "postpublish": "git push origin master && git push --tags"
   },
   "repository": {
@@ -26,11 +27,15 @@
   },
   "homepage": "https://github.com/nickvdyck/gulp-jspm-assets#readme",
   "devDependencies": {
+    "chai": "3.4.1",
     "eslint": "1.10.3",
-    "rimraf": "2.4.4",
+    "mocha": "2.3.4",
+    "rimraf": "2.5.0",
+    "ts-node": "0.5.5",
     "typescript": "1.7.5"
   },
   "dependencies": {
+    "glob-stream": "5.3.1",
     "vinyl": "1.1.0"
   }
 }
