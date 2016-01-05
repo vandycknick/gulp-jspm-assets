@@ -1,5 +1,10 @@
 # gulp-jspm-assets
+
+[![NPM version][npm-image]][npm-url]
+
 Consume css, images, ... assets from jspm all via a nice stream
+
+##Usage
 
 ```js
 var gulp = require('gulp');
@@ -13,3 +18,6 @@ gulp.task('assets', function() {
 });
 
 ```
+
+[npm-url]: https://www.npmjs.com/package/gulp-jspm-assets
+[npm-image]: https://badge.fury.io/js/gulp-jspm-assets.svg
