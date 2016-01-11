@@ -1,6 +1,6 @@
 # gulp-jspm-assets
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] 
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][dep-image]][dep-url]
 
 Consume css, images, ... assets from jspm all via a nice stream
 
@@ -47,4 +47,7 @@ gulp.task('images', function() {
 
 [travis-url]: https://travis-ci.org/nickvdyck/gulp-jspm-assets
 [travis-image]: https://travis-ci.org/nickvdyck/gulp-jspm-assets.svg?branch=master
+
+[dep-url]: https://david-dm.org/nickvdyck/gulp-jspm-assets
+[dep-image]: https://david-dm.org/nickvdyck/gulp-jspm-assets.svg 
 

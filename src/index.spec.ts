@@ -13,6 +13,9 @@ let jspmMock: IJavascriptPackageManager = {
   }
 };
 
+function noOp(): void { // no op function
+}
+
 describe('gulp-jspm-assets', () => {
 
   beforeEach(() => JspmAssetStream.jspm = jspmMock);
@@ -28,7 +31,8 @@ describe('gulp-jspm-assets', () => {
 
   it('should throw an error when options parameter is incorrect', () => {
     function errorFactory(): void {
-        let stream = new JspmAssetStream(<any>{});
+        let stream: JspmAssetStream = new JspmAssetStream(<any>{});
+        stream.on('data', noOp);
     }
     expect(errorFactory).to.throw('Provide a jspm package name and filepath or glob!');
   });

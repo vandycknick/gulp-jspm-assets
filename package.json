@@ -18,7 +18,8 @@
     "url": "git+https://github.com/nickvdyck/gulp-jspm-assets.git"
   },
   "keywords": [
-    "Gulp"
+    "gulp",
+    "jspm"
   ],
   "author": "Nick Van Dyck",
   "license": "MIT",
