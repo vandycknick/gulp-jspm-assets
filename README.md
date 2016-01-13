@@ -62,6 +62,7 @@ gulp.task('sass', function() {
       'bootstrap', 'sass/**/*.scss',
       'foundation', 'sass/**/*.scss'  
     })
+    .pipe(watheverTask())
     .pipe(gulp.dest('dest'));
 });
 ```

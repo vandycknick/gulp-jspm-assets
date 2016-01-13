@@ -10,6 +10,7 @@
     "clean-tests": "rimraf lib/**/*.spec.*",
     "prebuild": "npm run clean",
     "build": "tsc --version && tsc",
+    "postbuild": "mkdir lib && cp -p $(find .tmp/src -type f) lib" ,
     "prepublish": "npm run build && npm run clean-tests",
     "postpublish": "git push origin master && git push --tags"
   },
