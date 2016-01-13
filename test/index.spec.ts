@@ -1,6 +1,7 @@
 import * as assets from '../src/index';
 import { JspmAssetStream, jspmAssets, IJavascriptPackageManager } from '../src/index';
 import * as File from 'vinyl';
+import { Readable } from 'stream';
 
 let jspmMock: IJavascriptPackageManager = {
   normalize(packageName: string): Promise<string> {
@@ -11,6 +12,23 @@ let jspmMock: IJavascriptPackageManager = {
 };
 
 function noOp(): void { // no op function
+}
+
+class UselessStream extends Readable {
+  private data: any;
+  private times: number;
+  constructor(data: any, times: number = 1) {
+    super({ objectMode: true });
+    this.data = data;
+    this.times = times;
+  }
+
+  public _read(): void {
+    for (let i: number = 0; i < this.times; i++) {
+      this.push(this.data);
+    }
+    this.push(null);
+  }
 }
 
 describe('gulp-jspm-assets', () => {
@@ -96,6 +114,37 @@ describe('gulp-jspm-assets', () => {
       done();
     });
     stream.read();
+  });
+
+  it('should append jspm package assets from a piped stream', (done: any) => {
+    let stream1: Readable = new UselessStream({ file: 'whatever.js' });
+    let assets: JspmAssetStream = jspmAssets('demo', 'file1.js');
+    let counter: number = 0;
+    stream1.pipe(assets);
+
+    assets.on('end', () => {
+      expect(counter).to.equal(2);
+      done();
+    });
+    assets.on('error', done);
+
+    assets.on('data', () => counter++);
+
+  });
+
+  it('should append jspm package assets from a piped stream and preserve all the original data', (done: any) => {
+    let stream1: Readable = new UselessStream({ file: 'whatever.js' }, 2);
+    let assets: JspmAssetStream = jspmAssets('demo', 'file1.js');
+    let counter: number = 0;
+    stream1
+      .pipe(assets)
+      .on('data', () => counter++)
+      .on('error', done)
+      .on('end', () => {
+        expect(counter).to.equal(3);
+        done();
+      });
+
   });
 
 });

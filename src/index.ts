@@ -2,12 +2,12 @@
 
 import { parse, join, ParsedPath } from 'path';
 import { readFile } from 'fs';
-import { Readable, Stream } from 'stream';
+import { Readable, Duplex } from 'stream';
 import { create } from 'glob-stream';
 import * as File from 'vinyl';
 import { mergeStream } from './utils';
 
-export class JspmAssetStream extends Readable {
+export class JspmAssetStream extends Duplex {
     static jspm: IJavascriptPackageManager;
 
     private package: string = '';
@@ -101,6 +101,11 @@ export class JspmAssetStream extends Readable {
                     this.emit('error', error);
                 });
         }
+    }
+
+    public _write(data: any, enc: string, next: Function): void {
+      this.push(data);
+      next();
     }
 
 }
