@@ -7,7 +7,7 @@ module.exports = function(config) {
     ],
 
     tests: [
-      'src/*.spec.ts'
+      'test/**/*.spec.ts'
     ],
 
     compilers: {
@@ -18,7 +18,17 @@ module.exports = function(config) {
         type: "node"
     },
     
-    debug: true
+    debug: true,
+    
+    bootstrap: function (wallaby) {
+      var mocha = wallaby.testFramework;
+      var chai = require('chai');
+      
+      mocha.ui('bdd');
+
+      global.expect = chai.expect;
+
+    }
 
   };
 };

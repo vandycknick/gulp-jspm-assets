@@ -2,9 +2,10 @@
 
 import { parse, join, ParsedPath } from 'path';
 import { readFile } from 'fs';
-import { Readable } from 'stream';
+import { Readable, Stream } from 'stream';
 import { create } from 'glob-stream';
 import * as File from 'vinyl';
+import { mergeStream } from './utils';
 
 export class JspmAssetStream extends Readable {
     static jspm: IJavascriptPackageManager;
@@ -104,11 +105,33 @@ export class JspmAssetStream extends Readable {
 
 }
 
-export function jspmAssets(packageName: string, glob: string): JspmAssetStream {
-    return new JspmAssetStream({
-        glob : glob,
-        package: packageName
-    });
+export function jspmAssets(packageName: string | IJspmAssetsConfig, glob?: string): JspmAssetStream {
+    if (arguments.length === 2 && typeof packageName === 'string') {
+      return new JspmAssetStream({
+          glob : glob,
+          package: packageName
+      });
+    } else if (arguments.length === 1 && typeof packageName === 'object' && packageName !== null) {
+      let jspmAssets: IJspmAssetsConfig = packageName;
+      let streams: JspmAssetStream[] = [];
+      let keys: string[] = Object.keys(jspmAssets);
+
+      if (keys.length === 0 ) {
+        throw new Error('No packages or globs paths are provided in the config object!');
+      }else {
+        Object.keys(jspmAssets).forEach((asset: string) => {
+          streams.push(new JspmAssetStream({ glob: jspmAssets[asset], package: asset }));
+        });
+        return mergeStream.apply(null, streams);
+      }
+
+    } else {
+      throw new Error('Parameters not provided in the correct format!');
+    }
+}
+
+export interface IJspmAssetsConfig {
+   [index: string]: string;
 }
 
 export interface IJavascriptPackageManager {

@@ -1,9 +1,6 @@
-import * as assets from './index';
-import { JspmAssetStream, jspmAssets, IJavascriptPackageManager } from './index';
+import * as assets from '../src/index';
+import { JspmAssetStream, jspmAssets, IJavascriptPackageManager } from '../src/index';
 import * as File from 'vinyl';
-import * as chai from 'chai';
-
-let expect: Chai.ExpectStatic = chai.expect;
 
 let jspmMock: IJavascriptPackageManager = {
   normalize(packageName: string): Promise<string> {
@@ -27,6 +24,25 @@ describe('gulp-jspm-assets', () => {
 
   it('should return a new instance of JspmAssetStream', () => {
     expect(jspmAssets('demo', 'file1.js')).to.be.instanceOf(JspmAssetStream);
+  });
+
+  it('should throw an error when wrong parameters are given', () => {
+
+    function noParamError(): void {
+      jspmAssets.call(null);
+    }
+
+    function emptyObjectError(): void {
+      jspmAssets.call(null, {});
+    }
+
+    function wrongParameterError(): void {
+      jspmAssets.call(null, 1, 1);
+    }
+
+    expect(noParamError).to.throw('Parameters not provided in the correct format!');
+    expect(emptyObjectError).to.throw('No packages or globs paths are provided in the config object!');
+    expect(wrongParameterError).to.throw('Parameters not provided in the correct format!');
   });
 
   it('should throw an error when options parameter is incorrect', () => {
@@ -56,6 +72,21 @@ describe('gulp-jspm-assets', () => {
       done();
     });
 
+  });
+
+  it('should accept a config object and merge the streams', (done: any) => {
+    let counter: number = 0;
+    let stream: JspmAssetStream = jspmAssets({
+      'demo': 'file1.js',
+      'demo2': 'file2.js'
+    });
+
+    stream.on('end', () => {
+      expect(counter).to.equal(2);
+      done();
+    });
+    stream.on('error', done);
+    stream.on('data', () => counter++);
   });
 
   it('should emit an error when no files are found', (done: any) => {

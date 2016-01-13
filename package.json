@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "test": "mocha src/**/*.spec.ts --require ts-node/register",
+    "test": "mocha test/setup.ts test/**/*.spec.ts --require ts-node/register",
     "clean": "rimraf lib",
     "clean-tests": "rimraf lib/**/*.spec.*",
     "prebuild": "npm run clean",
