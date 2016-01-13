@@ -1,6 +1,6 @@
 {
   "name": "gulp-jspm-assets",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0-rc.4",
   "description": "Gulp plugin to easily consume assets from jspm packages",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -10,7 +10,7 @@
     "clean-tests": "rimraf lib/**/*.spec.*",
     "prebuild": "npm run clean",
     "build": "tsc --version && tsc",
-    "postbuild": "mkdir lib && cp -p $(find .tmp/src -type f) lib" ,
+    "postbuild": "mkdir lib && cp -p $(find .tmp/src -type f) lib",
     "prepublish": "npm run build && npm run clean-tests",
     "postpublish": "git push origin master && git push --tags"
   },
