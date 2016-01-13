@@ -9,6 +9,16 @@ Consume css, images, ... assets from jspm all via a nice stream
 ###jspmAssets(packageName, glob)
 Returns a new instance of JspmAssetStream
 
+###jspmAssets(config)
+Returns a merged stream of all the assets in the config object
+Config object:
+```json
+{
+  "foundation": "path/**/*.asset",
+  "bootstrap": "path/**/*.asset"
+}
+```
+
 ###JspmAssetStream(options)
 Constructor creates a new file stream matching files in the requested jspm package
 
@@ -40,6 +50,20 @@ gulp.task('images', function() {
         .pipe(gulp.dest('dest'));
 });
 
+```
+
+Use a config object to get assets from multiple jspm packages
+```js
+var gulp = require('gulp');
+var jspmAssets = require('gulp-jspm-assets');
+
+gulp.task('sass', function() {
+    jspmAssets({
+      'bootstrap', 'sass/**/*.scss',
+      'foundation', 'sass/**/*.scss'  
+    })
+    .pipe(gulp.dest('dest'));
+});
 ```
 
 [npm-url]: https://www.npmjs.com/package/gulp-jspm-assets
