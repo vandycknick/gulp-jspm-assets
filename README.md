@@ -67,6 +67,20 @@ gulp.task('sass', function() {
 });
 ```
 
+Or pipe a stream to it to append jspm package assets to it
+```js
+var gulp = require('gulp');
+var jspmAssets = require('gulp-jspm-assets');
+
+gulp.task('css', function() {
+    gulp.src('app/**/*.css')
+      .pipe(jspmAssets('prism', 'css/**/*.css'))
+      .pipe(watheverTask())
+      .pipe(concat('./build.css'))
+      .pipe(gulp.dest('dest'));
+});
+```
+
 [npm-url]: https://www.npmjs.com/package/gulp-jspm-assets
 [npm-image]: https://badge.fury.io/js/gulp-jspm-assets.svg
 
