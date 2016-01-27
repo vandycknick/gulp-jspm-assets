@@ -2,7 +2,7 @@
 
 import { parse, join, ParsedPath } from 'path';
 import { readFile } from 'fs';
-import { Readable, Duplex } from 'stream';
+import { Duplex } from 'stream';
 import { create } from 'glob-stream';
 import * as File from 'vinyl';
 import { mergeStream } from './utils';
