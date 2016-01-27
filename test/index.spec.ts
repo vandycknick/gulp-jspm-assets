@@ -1,9 +1,10 @@
 import * as assets from '../src/index';
-import { JspmAssetStream, jspmAssets, IJavascriptPackageManager } from '../src/index';
+import { JspmAssetStream, jspmAssets } from '../src/index';
 import * as File from 'vinyl';
 import { Readable } from 'stream';
+import { Jspm } from '../src/jspm';
 
-let jspmMock: IJavascriptPackageManager = {
+let jspmMock: Jspm = {
   normalize(packageName: string): Promise<string> {
     return new Promise((resolve: any, reject: any) => {
       resolve(__dirname + '/../fixtures/demo');
@@ -33,7 +34,9 @@ class UselessStream extends Readable {
 
 describe('gulp-jspm-assets', () => {
 
-  beforeEach(() => JspmAssetStream.jspm = jspmMock);
+  beforeEach(() => {
+    Jspm.mock(jspmMock);
+  });
 
   it('should expose an api', () => {
     expect(assets.jspmAssets).to.exist;

@@ -28,6 +28,10 @@
     "url": "https://github.com/nickvdyck/gulp-jspm-assets/issues"
   },
   "homepage": "https://github.com/nickvdyck/gulp-jspm-assets#readme",
+  "dependencies": {
+    "glob-stream": "5.3.1",
+    "vinyl": "1.1.0"
+  },
   "devDependencies": {
     "chai": "3.4.1",
     "eslint": "1.10.3",
@@ -36,8 +40,7 @@
     "ts-node": "0.5.5",
     "typescript": "1.7.5"
   },
-  "dependencies": {
-    "glob-stream": "5.3.1",
-    "vinyl": "1.1.0"
+  "peerDependencies": {
+    "jspm": "^0.16.25"
   }
 }

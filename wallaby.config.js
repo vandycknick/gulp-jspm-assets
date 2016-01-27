@@ -15,7 +15,11 @@ module.exports = function(config) {
     },
     
     env: {
-        type: "node"
+        type: "node",
+        params: {
+          //Workaround for jspm which pusses the home env variable to path.join.
+          env: 'HOME=/Users/c2159749'
+        }
     },
     
     debug: true,

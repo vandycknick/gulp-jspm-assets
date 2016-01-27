@@ -6,23 +6,14 @@ import { Duplex } from 'stream';
 import { create } from 'glob-stream';
 import * as File from 'vinyl';
 import { mergeStream } from './utils';
+import { Jspm } from './jspm';
 
 export class JspmAssetStream extends Duplex {
-    static jspm: IJavascriptPackageManager;
-
     private package: string = '';
     private glob: string = '';
     private started: boolean = false;
     private fileExt: RegExp = /file:\/\//i;
-
-    private get jspm(): IJavascriptPackageManager {
-      if (!JspmAssetStream.jspm) {
-        /* tslint:disable:no-require-imports */
-        JspmAssetStream.jspm = require('jspm');
-        /* tslint:enable:no-require-imports */
-      }
-      return JspmAssetStream.jspm;
-    }
+    private _jspm: Jspm;
 
     constructor(options: { package: string, glob: string }) {
         super({ objectMode: true });
@@ -30,6 +21,7 @@ export class JspmAssetStream extends Duplex {
           throw new Error('Provide a jspm package name and filepath or glob!');
         }
 
+        this._jspm = new Jspm();
         this.package = options.package;
         this.glob = options.glob;
     }
@@ -42,7 +34,7 @@ export class JspmAssetStream extends Duplex {
     }
 
     private resolveDirectory(packageName: string): Promise<string> {
-        return this.jspm.normalize(packageName).then((filePath: string) => {
+        return this._jspm.normalize(packageName).then((filePath: string) => {
             filePath = this.cleanFilePath(filePath);
             let parsed: ParsedPath = parse(filePath);
             let resolvedPath: string = join(parsed.dir, parsed.name);
@@ -138,8 +130,3 @@ export function jspmAssets(packageName: string | IJspmAssetsConfig, glob?: strin
 export interface IJspmAssetsConfig {
    [index: string]: string;
 }
-
-export interface IJavascriptPackageManager {
-    normalize(packageName: string): Promise<string>;
-}
-
