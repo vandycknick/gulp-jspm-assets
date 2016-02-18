@@ -5,7 +5,7 @@ import { readFile } from 'fs';
 import { Duplex } from 'stream';
 import { create } from 'glob-stream';
 import * as File from 'vinyl';
-import { mergeStream } from './utils';
+import { smashStreams } from 'smash-streams';
 import { Jspm } from './jspm';
 
 export class JspmAssetStream extends Duplex {
@@ -119,7 +119,7 @@ export function jspmAssets(packageName: string | IJspmAssetsConfig, glob?: strin
         Object.keys(jspmAssets).forEach((asset: string) => {
           streams.push(new JspmAssetStream({ glob: jspmAssets[asset], package: asset }));
         });
-        return mergeStream.apply(null, streams);
+        return <any>smashStreams(<any>streams);
       }
 
     } else {

@@ -19,7 +19,8 @@
     "url": "git+https://github.com/nickvdyck/gulp-jspm-assets.git"
   },
   "keywords": [
-    "gulp",
+    "gulpplugin",
+    "stream",
     "jspm"
   ],
   "author": "Nick Van Dyck",
@@ -30,7 +31,8 @@
   "homepage": "https://github.com/nickvdyck/gulp-jspm-assets#readme",
   "dependencies": {
     "glob-stream": "5.3.1",
-    "vinyl": "1.1.0"
+    "vinyl": "1.1.0",
+    "smash-streams": "1.0.0"
   },
   "devDependencies": {
     "chai": "3.4.1",

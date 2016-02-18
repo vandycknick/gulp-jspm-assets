@@ -110,6 +110,22 @@ describe('gulp-jspm-assets', () => {
     stream.on('data', () => counter++);
   });
 
+  it('should return the correct data from merged streams', (done: any) => {
+    let data: any[] = [];
+    let stream: JspmAssetStream = jspmAssets({
+      'demo': 'file1.js',
+      'demo2': 'file2.js'
+    });
+    stream.on('end', () => {
+      expect(data.length).to.equal(2);
+      expect(data[0].basename).to.equal('file1.js');
+      expect(data[1].basename).to.equal('file2.js');
+      done();
+    });
+    stream.on('error', done);
+    stream.on('data', (file: any) => data.push(file));
+  });
+
   it('should emit an error when no files are found', (done: any) => {
     let stream: JspmAssetStream = jspmAssets('demo', 'idonotexist.js');
     stream.on('error', function(error: Error): void {
