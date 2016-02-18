@@ -6,7 +6,7 @@
   "typings": "./lib/index.d.ts",
   "scripts": {
     "test": "mocha test/setup.ts test/**/*.spec.ts --require ts-node/register",
-    "clean": "rimraf lib",
+    "clean": "rimraf lib .tmp",
     "clean-tests": "rimraf lib/**/*.spec.*",
     "prebuild": "npm run clean",
     "build": "tsc --version && tsc",
