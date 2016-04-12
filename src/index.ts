@@ -12,7 +12,7 @@ export class JspmAssetStream extends Duplex {
     private package: string = '';
     private glob: string = '';
     private started: boolean = false;
-    private fileExt: RegExp = /file:\/\//i;
+    private protocolRE: RegExp = /^file:\/{2,4}/i;
     private _jspm: Jspm;
 
     constructor(options: { package: string, glob: string }) {
@@ -27,10 +27,7 @@ export class JspmAssetStream extends Duplex {
     }
 
     private cleanFilePath(filePath: string): string {
-        if (filePath.search(this.fileExt) !== -1) {
-            filePath = filePath.substring(6, filePath.length);
-        }
-        return filePath;
+        return filePath.replace(this.protocolRE, '');
     }
 
     private resolveDirectory(packageName: string): Promise<string> {
