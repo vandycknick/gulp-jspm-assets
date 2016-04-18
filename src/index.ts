@@ -12,7 +12,7 @@ export class JspmAssetStream extends Duplex {
     private package: string = '';
     private glob: string = '';
     private started: boolean = false;
-    private protocolRE: RegExp = /^file:\/{2,4}/i;
+    private protocolRE: RegExp = /^file:(?:\/{4}|\/{2})/i;
     private _jspm: Jspm;
 
     constructor(options: { package: string, glob: string }) {
