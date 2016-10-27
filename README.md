@@ -60,9 +60,9 @@ var jspmAssets = require('gulp-jspm-assets');
 gulp.task('sass', function() {
     jspmAssets({
       'bootstrap', 'sass/**/*.scss',
-      'foundation', 'sass/**/*.scss'  
+      'foundation', 'sass/**/*.scss'
     })
-    .pipe(watheverTask())
+    .pipe(whateverTask())
     .pipe(gulp.dest('dest'));
 });
 ```
@@ -75,7 +75,7 @@ var jspmAssets = require('gulp-jspm-assets');
 gulp.task('css', function() {
     gulp.src('app/**/*.css')
       .pipe(jspmAssets('prism', 'css/**/*.css'))
-      .pipe(watheverTask())
+      .pipe(whateverTask())
       .pipe(concat('./build.css'))
       .pipe(gulp.dest('dest'));
 });
@@ -88,5 +88,5 @@ gulp.task('css', function() {
 [travis-image]: https://travis-ci.org/nickvdyck/gulp-jspm-assets.svg?branch=master
 
 [dep-url]: https://david-dm.org/nickvdyck/gulp-jspm-assets
-[dep-image]: https://david-dm.org/nickvdyck/gulp-jspm-assets.svg 
+[dep-image]: https://david-dm.org/nickvdyck/gulp-jspm-assets.svg
 
